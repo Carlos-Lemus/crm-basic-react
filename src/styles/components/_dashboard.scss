@@ -1,0 +1,13 @@
+.dashboard__content {
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 0;
+}
+
+.dashboard__content-main {
+    background-color: $light;
+    height: 100%;
+    flex-grow: 1;
+    flex-shrink: 1;
+    position: relative;
+}

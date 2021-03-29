@@ -1,0 +1,67 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+} 
+
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: Helvetica, sans-serif;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-family: sans-serif, Helvetica;
+    text-align: center;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+.shadow-box {
+    box-shadow: 2px 2px 9px 0px gray;
+    -webkit-box-shadow: 2px 2px 9px 0px gray;
+    -moz-box-shadow: 2px 2px 9px 0px gray;
+}
+
+.exit-screen {
+    color: gray;
+    height: 35px;
+    transition: all 300ms;
+    position: absolute;
+    width: 35px;
+    top: 20px;
+    right: 20px;
+
+
+    &:hover {
+        color: $danger;
+    }
+}
+
+.p-1 {
+    padding: 0.625rem;
+}
+
+.p-5 {
+    padding: 1.25rem;
+}
+
+.mt-1 {
+    margin-top: 0.625rem;
+}
+.mt-5 {
+    margin-top: 25px;
+}
+.mb-1 {
+   margin-bottom: 0.625rem; 
+}
+
+.mb-5 {
+   margin-bottom: 1.25rem; 
+}

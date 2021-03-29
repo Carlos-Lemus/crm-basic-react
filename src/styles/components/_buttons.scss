@@ -1,0 +1,26 @@
+.btn-flat {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: gray;
+    outline: none;
+}
+
+.btn-edit {
+    color: $warning;
+    transition: all 300ms;
+
+    &:hover {
+        color: darken($color: $warning, $amount: 15);
+    }
+}
+
+.btn-delete {
+    color: $danger;
+
+    transition: all 300ms;
+
+    &:hover {
+        color: darken($color: $danger, $amount: 15);
+    }
+}
