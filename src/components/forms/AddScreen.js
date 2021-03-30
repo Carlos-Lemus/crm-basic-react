@@ -53,7 +53,7 @@ export const AddScreen = () => {
 
             <hr />
 
-            <Form textBtn="Update Client" handleSubmit={handleSubmit} inputChangeValues={inputChangeValues} {...formValues} />
+            <Form textBtn="Create New Client" handleSubmit={handleSubmit} inputChangeValues={inputChangeValues} {...formValues} />
 
         </main>
     )

@@ -5,21 +5,28 @@ const BrowserWindow = electron.BrowserWindow;
 let mainWindow;
 
 function createWindow() {
-mainWindow = new BrowserWindow({
-        width: 1200, 
+
+    mainWindow = new BrowserWindow({
+        width: 1200,
         height: 768,
-        webPreferences:{
-            nodeIntegration:true
+        minWidth: 800,
+        minHeight: 480,
+        center: true,
+        webPreferences: {
+            nodeIntegration: true
         }
     });
-    
-mainWindow.loadURL('http://localhost:3000');
-mainWindow.webContents.openDevTools();
-mainWindow.on('closed', function () {
+
+    mainWindow.loadURL('http://localhost:3000');
+
+    mainWindow.webContents.openDevTools();
+
+    mainWindow.on('closed', () => {
         mainWindow = null
     })
 }
 app.on('ready', createWindow);
+
 app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') {
         app.quit()

@@ -33,8 +33,7 @@ export const Form = ({textBtn, handleSubmit, inputChangeValues, firstName, secon
                     onChange={inputChangeValues}
                     className="form__control"
                     type="email"
-                    placeholder="Your email example
-                gmail.com" />
+                    placeholder="Email example@gmail.com" />
             </div>
 
             <div className="form__group mt-5">
@@ -44,7 +43,7 @@ export const Form = ({textBtn, handleSubmit, inputChangeValues, firstName, secon
                     onChange={inputChangeValues}
                     className="form__control"
                     type="phone"
-                    placeholder="Your phone"
+                    placeholder="Phone"
                 />
             </div>
 
