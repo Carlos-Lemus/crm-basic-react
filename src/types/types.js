@@ -4,7 +4,11 @@ export const types = {
     delete: "[Client] Delete",
     read: "[Client] Read",
     get: "[Client] Get Client",
+    filter: "[Client] Filter",
 
     loading: "[Spinner] loading",
-    loaded: "[Spinner] loaded"
+    loaded: "[Spinner] loaded",
+    
+    deploy: "[Sidebar] Deploy",
+    compact: "[Sidebar] compact"
 }

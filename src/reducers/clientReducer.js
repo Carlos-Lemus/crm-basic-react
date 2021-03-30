@@ -1,27 +1,27 @@
 import { types } from '../types/types';
 
-export const reducer = (state = {}, action) => {
+export const clientReducer = (state = {}, action) => {
     switch (action.type) {
         case types.add:
             return {
                 ...state,
                 customers: [...state.customers, action.payload]
             }
-            
+
         case types.read:
             return {
                 ...state,
                 customers: action.payload
             }
-        
+
         case types.update:
             return {
                 ...state,
                 customers: state.customers.map(client => (
-                    client.id === action.payload.id?
-                    action.payload
-                    :
-                    client
+                    client.id === action.payload.id ?
+                        action.payload
+                        :
+                        client
                 ))
             }
 
@@ -35,6 +35,12 @@ export const reducer = (state = {}, action) => {
             return {
                 ...state,
                 activeClient: action.payload
+            }
+
+        case types.filter:
+            return {
+                ...state,
+                customersFilter: action.payload
             }
 
         case types.loading:

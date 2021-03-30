@@ -5,46 +5,37 @@ import {
     Route,
     Redirect
 } from "react-router-dom";
-import { AddScreen } from "../components/AddScreen";
 import { AppBar } from "../components/AppBar";
-import { EditScreen } from "../components/EditScreen";
-import { RecordsScreen } from "../components/RecordsScreen";
-import { Siderbar } from "../components/Siderbar";
-import ContextCompontent from "../context/context";
+import { CompactSiderbar } from "../components/sidebars/CompactSidebar";
+import { AddScreen } from "../components/forms/AddScreen";
+import { EditScreen } from "../components/forms/EditScreen";
+import { RecordsScreen } from "../components/records/RecordsScreen";
+import { Siderbar } from "../components/sidebars/Siderbar";
+import { ContextClient } from "../context/contextClient";
 import { getDocuments } from "../firebase/firestore-methods";
-import { reducer } from "../reducer/reducer";
-import { types } from "../types/types";
+import { startGetCustomers } from "../helpers/startGetCustomers";
+import { ContextSidebar } from "../context/contextSidebar";
+import { clientReducer } from "../reducers/clientReducer";
+import { sidebarReducer } from "../reducers/sidebarReducer";
 
 export const AppRouter = () => {
 
-    const [state, dispatch] = useReducer(reducer, {
+    const [state, dispatch] = useReducer(clientReducer, {
         customers: [],
+        customersFilter: [],
         activeClient: null,
         loading: true
     });
 
-    const startGetCustomers = (customers) => {
-
-        dispatch({
-            type: types.read,
-            payload: customers.docs.map(client => {
-                return {
-                    id: client.id,
-                    ...client.data()
-                }
-            })
-        })
-
-        dispatch({
-            type: types.loaded
-        });
-    }
+    const [stateSidebar, dispatchSidebar] = useReducer(sidebarReducer, {
+        deploy: true
+    })
 
     useEffect(() => {
 
-        getDocuments("customers", customers => startGetCustomers(customers));
+        getDocuments("customers", customers => startGetCustomers(customers, dispatch));
 
-        
+
     }, []);
 
     return (
@@ -54,10 +45,19 @@ export const AppRouter = () => {
 
                 <div className="dashboard__content">
 
-                    <Siderbar />
+                    <ContextSidebar.Provider value={{
+                        stateSidebar, dispatchSidebar
+                    }}>
+                        {
+                            stateSidebar.deploy ?
+                                <Siderbar />
+                                :
+                                <CompactSiderbar />
+                        }
+                    </ContextSidebar.Provider>
 
                     <Switch>
-                        <ContextCompontent.Provider value={{
+                        <ContextClient.Provider value={{
                             state, dispatch
                         }}>
 
@@ -70,7 +70,7 @@ export const AppRouter = () => {
 
                             <Redirect to="/records" />
 
-                        </ContextCompontent.Provider>
+                        </ContextClient.Provider>
                     </Switch>
                 </div>
 

@@ -1,13 +1,14 @@
 import React, { useContext } from 'react'
-import { getDocument, remove } from '../firebase/firestore-methods';
-import contextValue from "../context/context";
-import { types } from '../types/types';
 import { useHistory } from 'react-router';
 import Swal from 'sweetalert2';
+import { ContextClient } from '../../context/contextClient';
+import { getDocument, remove } from '../../firebase/firestore-methods';
+import { types } from '../../types/types';
+
 
 export const RowTable = ({ id, firstName, secondName, email, phone }) => {
 
-    const { dispatch } = useContext(contextValue);
+    const { dispatch } = useContext(ContextClient);
 
     const history = useHistory();
 

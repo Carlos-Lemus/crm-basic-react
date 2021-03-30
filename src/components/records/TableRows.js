@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
-import contextValue from '../context/context';
+import { ContextClient } from '../../context/contextClient';
 import { RowTable } from './RowTable';
 
 export const TableRows = () => {
 
-    const { state } = useContext(contextValue);
+    const { state } = useContext(ContextClient);
 
-    const  {customers} = state;
+    const  {customersFilter} = state;
 
     return (
         <table className="mt-5 records__table shadow-box animate__animated animate__fadeIn">
@@ -22,7 +22,7 @@ export const TableRows = () => {
                     </tr>
 
                     {
-                        customers.map(client => (
+                        customersFilter.map(client => (
                             <RowTable key={client.id} {...client} />
                         ))
                     }

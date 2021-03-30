@@ -10,11 +10,20 @@
 }
 
 .records__table {
+    display: inline-block;
     background-color: white;
+    flex-shrink: 1;
     margin-left: auto;
     margin-right: auto;
     max-width: 800px;
-    width: 100%;
+    overflow: auto;
+    width: 90%;
+    
+    tbody {
+        overflow: auto;
+        
+    }
+
 }
 
 .records__actions {

@@ -1,14 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from "react-router-dom";
+import { ContextSidebar } from '../../context/contextSidebar';
+import { types } from '../../types/types';
 
 export const Siderbar = () => {
+
+    const  {dispatchSidebar} = useContext(ContextSidebar);
+
+    const handleClick = () => {
+        dispatchSidebar({
+            type: types.compact
+        }); 
+    } 
+
     return (
-        <aside className="sidebar__content">
+        <aside className="sidebar__content animate__animated animate__fadeInLeft">
 
             <div className="sidebar__head p-1">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-
                 <h4>Dashboard</h4>
+
+                <span onClick={handleClick}>
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </span>
 
             </div>
 
