@@ -6,17 +6,15 @@ import {
     Redirect
 } from "react-router-dom";
 import { AppBar } from "../components/AppBar";
-import { CompactSiderbar } from "../components/sidebars/CompactSidebar";
-import { AddScreen } from "../components/forms/AddScreen";
-import { EditScreen } from "../components/forms/EditScreen";
 import { RecordsScreen } from "../components/records/RecordsScreen";
-import { Siderbar } from "../components/sidebars/Siderbar";
+import { Sidebar } from "../components/Sidebar";
 import { ContextClient } from "../context/contextClient";
 import { getDocuments } from "../firebase/firestore-methods";
 import { startGetCustomers } from "../helpers/startGetCustomers";
-import { ContextSidebar } from "../context/contextSidebar";
+import { ContextUI } from "../context/contextUI";
 import { clientReducer } from "../reducers/clientReducer";
-import { sidebarReducer } from "../reducers/sidebarReducer";
+import { uiReducer } from "../reducers/uiReducer";
+import { FormScreen } from "../components/FormScreen";
 
 export const AppRouter = () => {
 
@@ -27,14 +25,13 @@ export const AppRouter = () => {
         loading: true
     });
 
-    const [stateSidebar, dispatchSidebar] = useReducer(sidebarReducer, {
+    const [stateUI, dispatchUI] = useReducer(uiReducer, {
         deploy: true
     })
 
     useEffect(() => {
 
         getDocuments("customers", customers => startGetCustomers(customers, dispatch));
-
 
     }, []);
 
@@ -45,28 +42,20 @@ export const AppRouter = () => {
 
                 <div className="dashboard__content">
 
-                    <ContextSidebar.Provider value={{
-                        stateSidebar, dispatchSidebar
+                    <ContextUI.Provider value={{
+                        stateUI, dispatchUI
                     }}>
-                        {
-                            stateSidebar.deploy ?
-                                <Siderbar />
-                                :
-                                <CompactSiderbar />
-                        }
-                    </ContextSidebar.Provider>
+                        <Sidebar />
+                    </ContextUI.Provider>
 
                     <Switch>
                         <ContextClient.Provider value={{
                             state, dispatch
                         }}>
 
-                            <Route exact path="/records/edit" component={EditScreen} />
+                            <Route exact path="/form" component={FormScreen} />
 
                             <Route exact path="/records" component={RecordsScreen} />
-
-                            <Route exact path="/add" component={AddScreen} />
-
 
                             <Redirect to="/records" />
 

@@ -3,7 +3,8 @@ export const types = {
     update: "[Client] Update",
     delete: "[Client] Delete",
     read: "[Client] Read",
-    get: "[Client] Get Client",
+    setActiveClient: "[Client] Set Active Client",
+    clearActiveClient: "[Client] Clear Get Client",
     filter: "[Client] Filter",
 
     loading: "[Spinner] loading",

@@ -21,7 +21,7 @@ export const RowTable = ({ id, firstName, secondName, email, phone }) => {
         const client = await getDocument("customers", id);
 
         dispatch({
-            type: types.get,
+            type: types.setActiveClient,
             payload: {
                 id: client.id,
                 ...client.data()
@@ -32,7 +32,7 @@ export const RowTable = ({ id, firstName, secondName, email, phone }) => {
             type: types.loaded
         });
 
-        history.replace(`/records/edit`);
+        history.replace(`/form`);
     }
 
     const handleDelete = () => {

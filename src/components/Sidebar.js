@@ -1,23 +1,37 @@
 import React, { useContext } from 'react';
 import { NavLink } from "react-router-dom";
-import { ContextSidebar } from '../../context/contextSidebar';
-import { types } from '../../types/types';
+import { ContextUI } from '../context/contextUI';
+import { types } from '../types/types';
 
-export const Siderbar = () => {
+export const Sidebar = () => {
 
-    const  {dispatchSidebar} = useContext(ContextSidebar);
+    const { stateUI: { deploy }, dispatchUI } = useContext(ContextUI);
+
+    const classDeploySidebar = "sidebar__content animate__animated animate__fadeInLeft";
+    const classCompactSidebar = "sidebar__compact-content animate__animated animate__slideInLeft";
 
     const handleClick = () => {
-        dispatchSidebar({
-            type: types.compact
-        }); 
-    } 
+
+        if (deploy) {
+            dispatchUI({
+                type: types.compact
+            });
+        } else {
+            dispatchUI({
+                type: types.deploy
+            });
+        }
+
+    }
 
     return (
-        <aside className="sidebar__content animate__animated animate__fadeInLeft">
+        <aside className={deploy ? classDeploySidebar : classCompactSidebar}>
 
             <div className="sidebar__head p-1">
-                <h4>Dashboard</h4>
+                {
+                    deploy &&
+                    <h4>Dashboard</h4>
+                }
 
                 <span onClick={handleClick}>
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -37,19 +51,26 @@ export const Siderbar = () => {
 
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
 
-                            Records Customers
+                            {
+                                deploy &&
+                                <span>Records Customers</span>
+                            }
                         </NavLink>
                     </li>
                     <li>
                         <NavLink
-                            to="/add"
+                            to="/form"
                             className="sidebar__btn p-5"
                             activeClassName="sidebar__active"
                         >
                             <div className="sidebar__pane-left"></div>
 
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            Add Client
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+
+                            {
+                                deploy &&
+                                <span>Add / Edit Client</span>
+                            }
                         </NavLink>
                     </li>
                 </ul>

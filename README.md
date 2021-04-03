@@ -2,7 +2,12 @@
 
 In the project directory, you can run:
 
+### `npm install -g yarn`
+
+In case of not having yarn 
+
 ### `npm install` 
+
 Get depedencies
 
 ### `npm start`

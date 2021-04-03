@@ -31,10 +31,16 @@ export const clientReducer = (state = {}, action) => {
                 customers: state.customers.filter(client => client.id !== action.payload)
             }
 
-        case types.get:
+        case types.setActiveClient:
             return {
                 ...state,
                 activeClient: action.payload
+            }
+
+        case types.clearActiveClient:
+            return {
+                ...state,
+                activeClient: null
             }
 
         case types.filter:

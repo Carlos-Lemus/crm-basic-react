@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import { ContextClient } from '../../context/contextClient';
 import { useForm } from '../../hooks/useForm';
 import { types } from '../../types/types';
@@ -14,8 +14,19 @@ export const RecordsScreen = () => {
         filter: '',
     });
 
-    const { loading, customers } = state;
+    const { loading, customers, activeClient } = state;
     const { filter } = inputValue;
+
+    const isActiveClient = useRef(activeClient);
+
+    useEffect(() => {
+
+        if(isActiveClient.current) {
+            dispatch({
+                type: types.clearActiveClient
+            });
+        }
+    }, [dispatch]);
 
     const handleSubmit = event => {
         event.preventDefault();
